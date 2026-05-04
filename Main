@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+    public static String validateSalary(int salary, boolean strict) {
+        // Напишите ваш код здесь
+        
+        // Проверка на отрицательную зарплату
+        if (salary < 0) {
+            throw new IllegalArgumentException("Salary cannot be negative");
+        }
+        
+        // Проверка на превышение лимита
+        if (salary > 1000000) {
+            throw new IllegalArgumentException("Salary cannot be greater than 1000000");
+        }
+        
+        // Проверка для strict режима: зарплата не может быть 0
+        if (strict && salary == 0) {
+            throw new IllegalArgumentException("Salary cannot be zero in strict mode");
+        }
+        
+        // Если все проверки пройдены
+        return String.valueOf(salary);
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int salary = Integer.parseInt(scanner.nextLine());
+        boolean strict = Boolean.parseBoolean(scanner.nextLine());
+        
+        try {
+            System.out.println(validateSalary(salary, strict));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
